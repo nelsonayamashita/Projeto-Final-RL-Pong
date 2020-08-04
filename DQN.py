@@ -129,23 +129,23 @@ class DQNAgent:
 
 if __name__ == '__main__':
     # Crie o ambiente 'pong:turing-easy-v0'
-    env = gym.make('pong:turing-normal-v0').env
+    env = gym.make('pong:turing-easy-v0').env
 
     # Hiperparâmetros da política epsilon-greedy
     initial_eps = 1
     min_eps = 0.01
-    eps_decay = .995
+    eps_decay = .85
     eps = initial_eps
     gamma = .995
 
     # Número total de episódios
-    num_episodes = 500
+    num_episodes = 25
 
     scores = []
 
     agent = DQNAgent(action_dim=3,
                      state_dim=4,
-                     architecture=[32, 32, 32, 32],
+                     architecture=[32, 32],
                      batch_size=512,
                      gamma=gamma)
 
@@ -161,7 +161,6 @@ if __name__ == '__main__':
             obs_, reward, done, info = env.step(action)
             score += reward
             agent.save_memory(obs, obs_, reward, action, done)
-            env.render()
             obs = obs_
             if t%32 == 0:  agent.optimize()
             t += 1
