@@ -3,10 +3,10 @@ import gym
 # Essa funcao deve rodar um episodio do ambiente escolhendo acoes aleatorias
 def rodar_ambiente():
     # Crie o ambiente 'pong:turing-easy-v0'
-    env = ...
-
+    env = gym.make('pong:turing-normal-v0').env
+    
     # Receba a observacao do primeiro estado
-    state = ...
+    state = env.reset()
 
     # Inicializando done como false
     done = False
@@ -14,13 +14,13 @@ def rodar_ambiente():
     # Loop de treino
     while not done:
         # Escolha uma acao aleatoria
-        action = ...
+        action = env.action_space.sample()
 
         # Tome essa acao e receba as informacoes do estado seguinte
-        next_state, reward, done, info = ...
+        next_state, reward, done, info = env.step(action)
 
         # Renderize o ambiente
-        ...
+        env.render()
 
         # Atualizando o estado
         state = next_state
